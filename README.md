@@ -7,21 +7,26 @@ The purpose is to demonstrate how the package works internally for DATA 533 — 
 
 # 1. Package Structure
 
+```text
 freshfridge/
 │
 ├── inventory/
+│ ├── init.py
 │ ├── items.py
 │ ├── operations.py
 │ └── persistence.py
 │
 ├── alerts/
+│ ├── init.py
 │ ├── expiry.py
 │ └── lowstock.py
 │
 └── reporting/
+├── init.py
 ├── base_report.py
 ├── summary.py
 └── shopping_list.py
+```
 
 
 The package is divided into three logical sub-packages:
