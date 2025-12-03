@@ -22,10 +22,10 @@ freshfridge/
 │ └── lowstock.py
 │
 └── reporting/
-├── init.py
-├── base_report.py
-├── summary.py
-└── shopping_list.py
+  ├── init.py
+  ├── base_report.py
+  ├── summary.py
+  └── shopping_list.py
 ```
 
 
