@@ -254,7 +254,7 @@ or run the test suite file:
 python test/test_suite.py
 ```
 
-# 6. Summary
+# 9. Summary
 
 This repository now contains:
 
