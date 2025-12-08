@@ -3,8 +3,8 @@
 ## Group 14
 ### Yin-Wen Tsai, Jiaqi Yao, Sasivimol Sirijangkapattana
 
-This document describes the structure of the FreshFridge package and explains the functionality of each module, class, and function.  
-The purpose is to demonstrate how the package works internally for DATA 533 — Step 3.
+FreshFridge is a Python package designed to manage refrigerator inventory, generate reports, and provide alerts for expiring or low-stock items.  
+This repository now includes both the Step 1 package implementation and the Step 2 unit test suite.
 
 ---
 
@@ -179,9 +179,89 @@ Creates and exports recommended shopping lists.
 
 This modular design demonstrates good software organization, separation of concerns, and proper use of Python packages.
 
+# 6. Unit Testing Structure (Step 2)
+
+A new directory contains all unit tests written using Python’s `unittest` framework.
+
+```text
+test/
+│
+├── test_items.py
+├── test_operations.py
+├── test_expiry.py
+├── test_lowstock.py
+└── test_suite.py
+```
+
+### ✔ Each test class includes:
+- `setUp()`, `tearDown()`
+- `setUpClass()`, `tearDownClass()`
+- ≥ 2 test cases
+- ≥ 4 assertions per test case
+
+### ✔ `test_suite.py`
+Manually loads all test classes into a unified suite so they can run together:
+
+```python
+import unittest
+from test_items import TestItems
+from test_operations import TestOperations
+from test_expiry import TestExpiryAlerts
+from test_lowstock import TestLowStockAlerts
+
+if __name__ == "__main__":
+    suite = unittest.TestSuite()
+    loader = unittest.TestLoader()
+
+    suite.addTests(loader.loadTestsFromTestCase(TestItems))
+    suite.addTests(loader.loadTestsFromTestCase(TestOperations))
+    suite.addTests(loader.loadTestsFromTestCase(TestExpiryAlerts))
+    suite.addTests(loader.loadTestsFromTestCase(TestLowStockAlerts))
+
+    runner = unittest.TextTestRunner(verbosity=2)
+    runner.run(suite)
+```
 ---
+
+# 7. Version Control Workflow (Step 2)
+
+The team followed collaborative Git workflows:
+
+Created new repository for Step 1 code
+
+Each member cloned repo, created personal branch
+
+Implemented unit tests independently
+
+Opened Pull Requests
+
+Reviewed & merged changes into main
+
+Git history demonstrates equal contribution
+
+---
+
+# 8. How to Run Tests
+
+```bash
+cd freshfridge-project
+python -m unittest discover test
+```
+
+or run the test suite file:
+
+```bash
+python test/test_suite.py
+```
 
 # 6. Summary
 
-This document explains all modules and functions required for understanding the FreshFridge package.  
-It serves as the function reference required in DATA 533 Step 3.
+This repository now contains:
+
+* Fully modular FreshFridge package (Step 1)
+
+* Complete unittest-based test coverage (Step 2)
+
+* Documented structure and collaborative Git history
+
+The codebase demonstrates modular design, documentation, testability, and collaborative software development practices suitable for DATA 533.
