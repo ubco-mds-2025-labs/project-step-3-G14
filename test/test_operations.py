@@ -1,5 +1,5 @@
 import unittest
-from freshfridge.operations import add_item, use_item
+from freshfridge.inventory.operations import add_item, use_item
 from freshfridge.inventory.items import Item
 
 class TestOperations(unittest.TestCase):

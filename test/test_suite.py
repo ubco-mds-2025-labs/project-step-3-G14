@@ -1,9 +1,9 @@
 import unittest
 
-from .test_items import TestItems
-from .test_operations import TestOperations
-from .test_expiry import TestExpiry
-from .test_lowstock import TestLowStock
+from test.test_items import TestItems
+from test.test_operations import TestOperations
+from test.test_expiry import TestExpiry
+from test.test_lowstock import TestLowStock
 
 
 def suite():
