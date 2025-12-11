@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "freshfridge"
+version = "0.1.0"
+description = "Fresh fridge inventory manager"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
