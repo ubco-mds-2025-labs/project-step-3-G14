@@ -11,9 +11,9 @@ def build_sample_inventory():
     inv = InventoryOperations()
     inv.add_item("Milk",   2,  "L",    "2025-12-18")
     inv.add_item("Eggs",   12, "pcs",  "2025-12-20")
-    inv.add_item("Butter", 1,  "pack", "2025-12-30")
+    inv.add_item("Butter", 0,  "pack", "2025-12-30")
     inv.add_item("Apples", 5,  "pcs",  "2025-12-29")
-    inv.add_item("Cheese", 0,  "block","2025-12-25")
+    inv.add_item("Cheese", 1,  "block","2025-12-25")
     return inv
 
 
