@@ -1,7 +1,4 @@
-[project]
-name = "freshfridge"
-version = "0.1.0"
-
+# pyproject.toml
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
