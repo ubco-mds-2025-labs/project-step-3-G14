@@ -17,7 +17,8 @@ class TestLowStock(unittest.TestCase):
         self.assertEqual(result[0], ("Apple", 3, 5))
 
     def test_items_at_zero(self):
-        self.inventory.add_item("Empty", 0, "pcs", "2025-12-20")
+        self.inventory.add_item("Empty", 1, "pcs", "2025-12-20")
+        self.inventory.use_item("Empty", 1)  
         zero_items = self.alerts.items_at_zero(self.inventory)
         self.assertEqual(len(zero_items), 1)
         self.assertEqual(zero_items[0].name, "Empty")

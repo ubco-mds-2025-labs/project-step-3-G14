@@ -28,3 +28,7 @@ class TestOperations(unittest.TestCase):
         self.inventory.add_item("Milk", 1, "L", "2025-12-15")
         self.inventory.remove_item("Milk")
         self.assertNotIn("Milk", self.inventory.items)
+        
+    def test_add_item_zero_quantity_raises_error(self):
+        with self.assertRaises(ValueError):
+            self.inventory.add_item("Zero", 0, "pcs", "2025-12-20")

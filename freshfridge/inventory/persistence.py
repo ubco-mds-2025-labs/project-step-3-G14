@@ -14,8 +14,13 @@ class InventoryPersistence:
                 "unit": item.unit,
                 "expiry_date": item.expiry_date.strftime("%Y-%m-%d"),
             }
-        with open(path, "w") as f:
-            json.dump(data, f, indent=2)
+        try:
+            with open(path, "w") as f:
+                json.dump(data, f, indent=2)
+        except PermissionError:
+            raise PermissionError(f"Cannot write to {path}: permission denied")
+        except OSError as e:
+            raise OSError(f"Failed to save inventory: {e}")
 
     @staticmethod
     def load_inventory(inventory, path: str = "inventory.json") -> None:
@@ -31,8 +36,9 @@ class InventoryPersistence:
                     info["expiry_date"],
                 )
         except FileNotFoundError:
-            # If there is no file yet, just do nothing
-            pass
+            pass  # do nothing if there's nothing
+        except json.JSONDecodeError:
+            raise ValueError(f"Invalid JSON format in {path}")
 
     @staticmethod
     def inventory_to_dict(inventory) -> dict:

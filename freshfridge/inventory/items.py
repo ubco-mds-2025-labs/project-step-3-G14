@@ -1,5 +1,8 @@
 from datetime import datetime
 
+class InvalidExpiryDateError(Exception):
+    """Raised when the expiry date format is invalid."""
+    pass
 
 class BaseItem:
     """Parent class storing basic item information."""
@@ -23,8 +26,12 @@ class FreshItem(BaseItem):
         super().__init__(name)
         self.quantity = quantity
         self.unit = unit
-        # expiry_date format: "YYYY-MM-DD"
-        self.expiry_date = datetime.strptime(expiry_date, "%Y-%m-%d")
+        try:
+            self.expiry_date = datetime.strptime(expiry_date, "%Y-%m-%d")
+        except ValueError as e:
+            raise InvalidExpiryDateError(
+                f"Invalid expiry date format: '{expiry_date}'. Must be YYYY-MM-DD"
+            ) from e
 
     def reduce_quantity(self, amount: float) -> None:
         """Reduce quantity by a given amount (not going below zero)."""
