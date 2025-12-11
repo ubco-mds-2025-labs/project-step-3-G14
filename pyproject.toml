@@ -24,3 +24,5 @@ dependencies = []
 
 [project.scripts]
 freshfridge = "scripts.freshfridge_app:main"
+
+# changed
