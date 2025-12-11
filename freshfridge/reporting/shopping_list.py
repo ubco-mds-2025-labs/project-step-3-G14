@@ -5,10 +5,9 @@ class ShoppingListReport(BaseReport):
     """Generates shopping list based on low-stock items."""
 
     def generate_shopping_list(self, thresholds: dict):
-        """
-        Return a list of shopping items:
-        [{name, current_qty, needed}, ...]
-        """
+        """Return a list of shopping items."""
+        if not isinstance(thresholds, dict):
+            raise TypeError("thresholds must be a dictionary")
         shopping_list = []
         for name, item in self.inventory.items.items():
             if name in thresholds and item.quantity < thresholds[name]:

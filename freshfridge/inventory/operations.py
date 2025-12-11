@@ -10,6 +10,8 @@ class InventoryOperations:
 
     def add_item(self, name: str, quantity: float, unit: str, expiry_date: str) -> None:
         """Create or overwrite an item in the inventory."""
+        if quantity <= 0:
+            raise ValueError("Quantity must be positive")
         self.items[name] = FreshItem(name, quantity, unit, expiry_date)
 
     def use_item(self, name: str, quantity: float) -> None:

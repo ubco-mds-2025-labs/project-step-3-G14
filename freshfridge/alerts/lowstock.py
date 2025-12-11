@@ -2,10 +2,9 @@ class LowStockAlerts:
     """Provides low-stock alert functionality."""
 
     def low_stock_alert(self, inventory, thresholds: dict):
-        """
-        Return list of (name, current_qty, threshold) for items below threshold.
-        thresholds: dict[name] = minimum desired quantity
-        """
+        """Return list of (name, current_qty, threshold) for items below threshold."""
+        if not isinstance(thresholds, dict):
+            raise TypeError("thresholds must be a dictionary")
         alerts = []
         for name, item in inventory.items.items():
             if name in thresholds and item.quantity < thresholds[name]:
