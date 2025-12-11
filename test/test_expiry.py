@@ -1,6 +1,7 @@
 import unittest
 from freshfridge.alerts.expiry import ExpiryAlerts
 from freshfridge.inventory.operations import InventoryOperations
+from unittest.mock import patch
 
 class TestExpiry(unittest.TestCase):
 
@@ -26,5 +27,7 @@ class TestExpiry(unittest.TestCase):
 
     def test_days_until_expiry(self):
         yogurt = self.inventory.items["Yogurt"]
-        days = self.alerts.days_until_expiry(yogurt)
-        self.assertEqual(days, 5)  # 2025-12-15 - 2025-12-10 = 5 
+        with patch('freshfridge.alerts.expiry.datetime') as mock_datetime:
+            mock_datetime.today.return_value = datetime(2025, 12, 10)
+            days = self.alerts.days_until_expiry(yogurt)
+            self.assertEqual(days, 5)
