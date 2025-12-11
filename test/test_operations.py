@@ -1,5 +1,5 @@
 import unittest
-from freshfridge.operations import add_item, use_item
+from freshfridge.inventory.operations import add_item, use_item
 from freshfridge.inventory.items import Item
 
 class TestOperations(unittest.TestCase):
@@ -33,3 +33,4 @@ class TestOperations(unittest.TestCase):
         self.assertGreater(self.inventory["Eggs"].quantity, 0)
         self.assertIsInstance(self.inventory["Eggs"], Item)
         self.assertNotEqual(self.inventory["Eggs"].quantity, 12)
+
