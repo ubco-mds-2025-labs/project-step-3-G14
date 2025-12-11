@@ -46,7 +46,7 @@ freshfridge
 
 Available commands:
 
-1.  `addsmallcaps` (or `a`) – Add a new item
+1.  `add` – Add a new item
 
 2.  `use` – Use part of an item
 
