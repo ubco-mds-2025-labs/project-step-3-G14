@@ -1,36 +1,30 @@
 import unittest
-from freshfridge.inventory.operations import add_item, use_item
-from freshfridge.inventory.items import Item
+from freshfridge.inventory.operations import InventoryOperations
+from freshfridge.inventory.items import FreshItem
 
 class TestOperations(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        print("Setting up TestOperations class")
-
     def setUp(self):
-        self.inventory = {}
-        self.item = Item("Eggs", 12, "pcs", "2025-02-20")
-
-    def tearDown(self):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        print("Tearing down TestOperations class")
+        self.inventory = InventoryOperations()
 
     def test_add_item(self):
-        add_item(self.inventory, self.item)
-        self.assertIn("Eggs", self.inventory)
-        self.assertEqual(self.inventory["Eggs"].quantity, 12)
-        self.assertIsInstance(self.inventory["Eggs"], Item)
-        self.assertEqual(len(self.inventory), 1)
+        self.inventory.add_item("Eggs", 12, "pcs", "2025-12-20")
+        self.assertIn("Eggs", self.inventory.items)
+        item = self.inventory.items["Eggs"]
+        self.assertIsInstance(item, FreshItem)
+        self.assertEqual(item.quantity, 12)
+        self.assertEqual(item.unit, "pcs")
 
     def test_use_item(self):
-        add_item(self.inventory, self.item)
-        use_item(self.inventory, "Eggs", 2)
-        self.assertEqual(self.inventory["Eggs"].quantity, 10)
-        self.assertGreater(self.inventory["Eggs"].quantity, 0)
-        self.assertIsInstance(self.inventory["Eggs"], Item)
-        self.assertNotEqual(self.inventory["Eggs"].quantity, 12)
+        self.inventory.add_item("Eggs", 12, "pcs", "2025-12-20")
+        self.inventory.use_item("Eggs", 5)
+        self.assertEqual(self.inventory.items["Eggs"].quantity, 7)
 
+    def test_use_item_nonexistent(self):
+        self.inventory.use_item("Nonexistent", 10)
+        self.assertNotIn("Nonexistent", self.inventory.items)
+
+    def test_remove_item(self):
+        self.inventory.add_item("Milk", 1, "L", "2025-12-15")
+        self.inventory.remove_item("Milk")
+        self.assertNotIn("Milk", self.inventory.items)

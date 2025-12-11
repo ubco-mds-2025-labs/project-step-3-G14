@@ -1,27 +1,15 @@
+# test/test_suite.py
 import unittest
-
-from .test_items import TestItems
-from .test_operations import TestOperations
-from .test_expiry import TestExpiry
-from .test_lowstock import TestLowStock
-
 
 def suite():
     """
-    Build a test suite that includes all test classes
-    for the FreshFridge package.
+    Automatically discover and run all test cases in the 'test/' directory.
     """
     loader = unittest.TestLoader()
-    test_suite = unittest.TestSuite()
+    # Automatically find .py file with "test_" from test/
+    suite = loader.discover(start_dir='test', pattern='test_*.py')
+    return suite
 
-    test_suite.addTests(loader.loadTestsFromTestCase(TestItems))
-    test_suite.addTests(loader.loadTestsFromTestCase(TestOperations))
-    test_suite.addTests(loader.loadTestsFromTestCase(TestExpiry))
-    test_suite.addTests(loader.loadTestsFromTestCase(TestLowStock))
-
-    return test_suite
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite())
