@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "freshfridge"
-version = "0.1.0"
+version = "0.1.1"
 description = "Fresh fridge inventory manager with expiry and low-stock alerts"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -23,4 +23,4 @@ classifiers = [
 dependencies = []
 
 [project.scripts]
-freshfridge = "scripts.freshfridge_app:main"
+# freshfridge = "scripts.freshfridge_app:main"
