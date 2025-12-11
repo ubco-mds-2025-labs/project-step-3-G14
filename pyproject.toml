@@ -23,4 +23,4 @@ classifiers = [
 dependencies = []
 
 [project.scripts]
-# freshfridge = "scripts.freshfridge_app:main"
+freshfridge = "scripts.freshfridge_app:main"
