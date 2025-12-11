@@ -1,36 +1,35 @@
+# test/test_expiry.py
 import unittest
-from freshfridge.alerts.expiry import check_expiring
-from freshfridge.inventory.items import Item
+from datetime import datetime, timedelta
+from unittest.mock import patch
+from freshfridge.alerts.expiry import ExpiryAlerts
+from freshfridge.inventory.operations import InventoryOperations
 
 class TestExpiry(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        print("Setting up TestExpiry class")
-
     def setUp(self):
-        self.items = [
-            Item("Yogurt", 1, "cup", "2025-02-10"),
-            Item("Bread", 1, "loaf", "2025-05-10")
-        ]
+        self.inventory = InventoryOperations()
+        self.inventory.add_item("Yogurt", 1, "cup", "2025-12-15")
+        self.inventory.add_item("Bread", 1, "loaf", "2026-05-10")
+        self.alerts = ExpiryAlerts()
 
-    def tearDown(self):
-        pass
+    def test_check_expiring(self):
+        expiring = self.alerts.check_expiring(self.inventory, within_days=10)
+        self.assertEqual(len(expiring), 1)
+        self.assertEqual(expiring[0].name, "Yogurt")
 
-    @classmethod
-    def tearDownClass(cls):
-        print("Tearing down TestExpiry class")
+    def test_mark_expired(self):
+        expired = self.alerts.mark_expired(self.inventory)
+        self.assertEqual(len(expired), 0)
 
-    def test_expiry_detects_near_items(self):
-        result = check_expiring(self.items, days=30)
-        self.assertIn("Yogurt", result)
-        self.assertNotIn("Bread", result)
-        self.assertIsInstance(result, list)
-        self.assertGreaterEqual(len(result), 1)
+        self.inventory.add_item("Old Milk", 1, "L", "2025-11-01")
+        expired = self.alerts.mark_expired(self.inventory)
+        self.assertEqual(len(expired), 1)
+        self.assertEqual(expired[0].name, "Old Milk")
 
-    def test_expiry_no_near_items(self):
-        result = check_expiring(self.items, days=1)
-        self.assertEqual(len(result), 0)
-        self.assertIsInstance(result, list)
-        self.assertNotIn("Yogurt", result)
-        self.assertNotIn("Bread", result)
+    def test_days_until_expiry(self):
+        yogurt = self.inventory.items["Yogurt"]
+        with patch('freshfridge.alerts.expiry.datetime') as mock_datetime:
+            mock_datetime.today.return_value = datetime(2025, 12, 10)  
+            days = self.alerts.days_until_expiry(yogurt)
+            self.assertEqual(days, 5)
