@@ -1,4 +1,5 @@
 import unittest
+
 from datetime import datetime, timedelta
 from freshfridge.inventory.items import FreshItem
 
@@ -21,8 +22,9 @@ class TestFreshItem(unittest.TestCase):
 
     def test_item_creation(self):
         self.assertEqual(self.item.name, "Milk")
-        self.assertEqual(self.item.quantity, 2)
+        self.assertEqual(self.item.quantity, 2.0)
         self.assertEqual(self.item.unit, "L")
+
         self.assertIsInstance(self.item.expiry_date, datetime)
 
     def test_rename(self):
