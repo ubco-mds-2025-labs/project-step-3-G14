@@ -48,19 +48,19 @@ Available commands:
 
 1.  `addsmallcaps` (or `a`) – Add a new item
 
-2.  `use` (or `u`) – Use part of an item
+2.  `use` – Use part of an item
 
-3.  `show` (or `s`) – Show current inventory
+3.  `show` – Show current inventory
 
-4.  `exp` (or \`expiry) – Check expiring items
+4.  `exp` – Check expiring items
 
-5.  `low` (or `l`) – Check low-stock items and manage thresholds
+5.  `low` – Check low-stock items and manage thresholds
 
-6.  `shop` (or `shopping`) – Generate shopping list
+6.  `shop` – Generate shopping list
 
-7.  `help` (or `h`) – Show all commands
+7.  `help` – Show all commands
 
-8.  `quit` (or `q`) – Save and exit
+8.  `quit` – Save and exit
 
 ------------------------------------------------------------------------
 
