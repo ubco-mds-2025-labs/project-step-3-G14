@@ -1,4 +1,3 @@
-# pyproject.toml
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -6,10 +5,22 @@ build-backend = "hatchling.build"
 [project]
 name = "freshfridge"
 version = "0.1.0"
-description = "Fresh fridge inventory manager"
+description = "Fresh fridge inventory manager with expiry and low-stock alerts"
 readme = "README.md"
 requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Yin-Wen Tsai", email = "yinwentsai@gmail.com" },
+    { name = "Sasivimol Sirijangkapattana", email = "Siri.sasivimol@gmail.com" },
+    { name = "Jiaqi Yao", email = "jiaqiyao2003@outlook.com" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
 dependencies = []
 
 [project.scripts]
-freshfridge = "scripts.freshfridge_app:main"  
+freshfridge = "scripts.freshfridge_app:main"
