@@ -1,4 +1,4 @@
-# \# FreshFridge 🧊 Package Function Documentation
+# FreshFridge 🧊 Package Function Documentation
 
 A refrigerator inventory management system with expiry date alerts, low-stock detection, and shopping list generation.
 
